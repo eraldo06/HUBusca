@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Image, } from 'react-native';
+import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import styled from 'styled-components/native';
-import { ContainerBusca, Div, Lado01, Lado02, Input, ContainerResultado, TextoResul, Buttoon } from './componetes'
+import { ContainerBusca, Div, Lado01, Lado02, Input, ContainerResultado, TextoResul, Buttoon, DivUsuario,} from './componetes'
 
 
 
@@ -53,9 +53,15 @@ const Home = () => {
                 </Div>
 
                 <Input onChangeText={mudarTexto} />
-                <Buttoon onPress={carregar}>Carregar</Buttoon>
-
-
+                <Buttoon onPress={carregar}>
+                    <Text style={{fontSize:20}}>Carregar</Text>
+                    {mostrar === false &&
+                        <Text style={{ fontSize: 20 }}>Nenhum historico...</Text>
+                    }
+                  
+                    
+                </Buttoon>
+          
 
             </ContainerBusca>
 
@@ -65,17 +71,19 @@ const Home = () => {
                         <Text style={{ fontSize: 20 }}>Nenhum historico...</Text>
                     }
                     {linha &&
-                        <Div style={{backgroundColor:'red'}}>
+                        <DivUsuario>
+                        
                         <Image source={{ uri: `${usario.avatar_url}` }}
                             style={{ width: 80, height: 80, borderRadius:20 }}
+                           
                         />
                         <View>
-                            <Text>{usario.login}</Text>
-                            <Text>{usario.name}</Text>
-                            <Text>{usario.id}</Text>
-                            <Text>{usario.location}</Text>
+                            <Text style={{marginLeft:10}}>{usario.login}</Text>
+                            <Text style={{marginLeft:10}}>{usario.name}</Text>
+                            <Text style={{marginLeft:10}}>{usario.id}</Text>
+                            <Text style={{marginLeft:10}}>{usario.location}</Text>
                         </View>
-                    </Div>
+                    </DivUsuario>
                     }
                     
 

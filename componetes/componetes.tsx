@@ -9,12 +9,12 @@ export const Input = styled.TextInput`
     color: white;
     height: 50px;
     border-radius: 10px;
-   margin-left: 8%;
+    margin-left: 8%;
     margin-top: 15%;
 `;
 
 export const ContainerBusca = styled.View`
-    height: 55%;
+    min-height: 65%;
     background-color: aqua;
 `;
 export const Div = styled.View`
@@ -47,8 +47,15 @@ export const Buttoon = styled.Text`
         background-color: black;
         width:80%;
         margin-left: 8%;
-        height: 50px;
+        min-height: 50px;
         color: white;
         border-radius: 15px;
-        
+        display: flex;
+`
+
+export const DivUsuario = styled.View`
+    flex-direction: row;
+    background-color: white;
+    width: 80%;
+    border-radius: 20px;
 `
