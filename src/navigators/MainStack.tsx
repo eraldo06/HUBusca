@@ -8,6 +8,7 @@ const MainStack = createStackNavigator();
 export default ()=>{
     return(
     <MainStack.Navigator>
+        
         <MainStack.Screen name="Home" component={Home}/>
         <MainStack.Screen name="Detalhes" component={Detalhes}/>
     </MainStack.Navigator>

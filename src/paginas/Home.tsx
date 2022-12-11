@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { ContainerBusca, Div, Lado01, Lado02, Input, ContainerResultado, TextoResul, Buttoon, DivUsuario, } from '../componetes/componetes'
+import { ContainerBusca, Div, Lado01, Lado02, Input, ContainerResultado, TextoResul, Buttoon, DivUsuario,  } from '../componetes/componetes'
 
 
 
@@ -23,7 +23,6 @@ const Home = (props:any) =>  {
         linha = true
 
     }
-
 
     function mudarTexto(texto: any) {
         setName(texto)
@@ -72,13 +71,12 @@ const Home = (props:any) =>  {
                     }
                             {linha &&
                           
-                                <DivUsuario>
-                                    <Buttoon onPress={paginaDetalhes}>
+                                <DivUsuario onTouchStart={paginaDetalhes}>
                                     <Image source={{ uri: `${usario.avatar_url}` }}
-                                        style={{ width: 80, height: 80, borderRadius: 20 }}
-
+                                        style={{ width: 80, height: 80, borderRadius: 20}}
                                     />
-                                  </Buttoon>
+                                 
+                                  
                                     
                                     <View>
                                         <Text style={{ marginLeft: 10 }}>{usario.login}</Text>
