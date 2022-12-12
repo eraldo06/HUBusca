@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Div1, Div2, Container, ContainerRepositorios, Repositorios, Caminho, ContainerPage } from "../componetes/componetesDetalhes";
 
@@ -7,7 +7,9 @@ function Detalhes(props: any) {
 
     let nomeUsuario = props.route.params.name
     const [usuario, setUsuario] = useState([]);
-    const [repo, setRepo] = useState('');
+    const [repo, setRepo] = useState([]);
+    const [seguidor, setSeguidor] = useState([]);
+   
 
     const carregar = async () => {
         const req = await fetch(`https://api.github.com/users/${nomeUsuario}`);
@@ -15,6 +17,15 @@ function Detalhes(props: any) {
 
         if (json) {
             setUsuario(json)
+        }
+
+    }
+    const quantidadeDeSeguidor = async () => {
+        const req = await fetch(`https://api.github.com/users/${nomeUsuario}/followers`);
+        const json = await req.json();
+
+        if (json) {
+            setSeguidor(json)
         }
     }
 
@@ -26,43 +37,49 @@ function Detalhes(props: any) {
             setRepo(json)
         }
     }
-
+    carregar()
+    quantidadeDeSeguidor()
+    carregarR()
     return (
         <>
             <ContainerPage>
                 <Container>
                     <Div1>
                         <Image
-                            source={require('../../assets/eraldo.png')}
+                            source={{ uri: `${usuario.avatar_url}` }}
                             style={{ width: 180, height: 200, borderRadius: 20 }}
                         />
-
                     </Div1>
                     <Div2>
                         <View style={{ margin: 10 }}>
-                            <Text>{usuario.login}login</Text>
-                            <Text>{usuario.name}name</Text>
-                            <Text>{usuario.name}Localização</Text>
-                            <Text>{usuario.name}ID</Text>
-                            <Text>seguidores:{usuario.name}</Text>
+                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>{usuario.login}</Text>
+                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>{usuario.name}</Text>
+                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>{usuario.location}</Text>
+                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>ID: {usuario.id}</Text>
+                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>Seguidores:{seguidor.length}</Text>
                         </View>
-
                     </Div2>
 
                 </Container>
-                <Text style={{ fontSize: 20, marginTop: 10, marginBottom: 20, fontWeight: 'bold',marginLeft: 15 }}>Repositorios:</Text>
+                <Text style={{ fontSize: 20, marginTop: 10, marginBottom: 20, fontWeight: 'bold', marginLeft: 15 }}>Repositorios:</Text>
             </ContainerPage>
             <ContainerRepositorios>
-                <View style={{ marginLeft: 15, marginRight: 15 }}>
-                    <Repositorios>
-                        <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Projeto-calculadora</Text>
-                        <Text>HTML</Text>
-                        <Text>Descrição</Text>
-                        <Text>Criado: 06/02/2022</Text>
-                        <Text>Ultimo Push: 06/02/2022</Text>
-                    </Repositorios>
-                </View>
 
+                <View style={{ marginLeft: 15, marginRight: 15 }}>
+                    <FlatList
+                        data={repo}
+                        renderItem={({ item }) => (
+                            <Repositorios>
+                                <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{item.name}</Text>
+                                <Text>{item.language}</Text>
+                                <Text>{item.description}</Text>
+                                <Text>Criado: {item.created_at}</Text>
+                                <Text>Ultimo Push: {item.updated_at}</Text>
+                            </Repositorios>
+                        )}
+                        keyExtractor={item => item.name}
+                    ></FlatList>
+                </View>
             </ContainerRepositorios>
 
         </>

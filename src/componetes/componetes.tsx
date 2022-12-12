@@ -4,22 +4,19 @@ import { StatusBar } from 'expo-status-bar';
 import styled from 'styled-components/native';
 
 export const Input = styled.TextInput`
-    width: 80%;
+    width: 70%;
     background-color: #3a4141;
     color: white;
     height: 50px;
     border-radius: 10px;
-    margin-left: 8%;
-    margin-top: 15%;
 `;
 
 export const ContainerBusca = styled.View`
-    min-height: 65%;
-    background-color: aqua;
+    min-height: 35%;
+    background-color: white;
 `;
 export const Div = styled.View`
     flex-direction: row;
-    margin-top: 10%;
     margin-left: 5%;
 `;
 export const Lado01 = styled.View`
@@ -32,7 +29,7 @@ export const Lado02 = styled.View`
 `
 
 // Resultados
-export const ContainerResultado = styled.View`
+export const ContainerResultado = styled.ScrollView`
     flex:1;
     background-color: #3a4141;
 `;
@@ -40,17 +37,18 @@ export const ContainerResultado = styled.View`
 export const TextoResul = styled.SafeAreaView`
   justify-content: center;
   align-items: center;
-  margin-top: 20%;
+  margin-top: 2%;
 `
 
 export const Buttoon = styled.Text`
         background-color: black;
-        width:80%;
-        margin-left: 8%;
-        min-height: 50px;
+        width:30%;
+        height: 50px;
         color: white;
         border-radius: 15px;
-        display: flex;
+        margin-left: -20px;
+        justify-content: center;
+        align-items: center;
 `
 
 export const DivUsuario = styled.View`
