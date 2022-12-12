@@ -9,8 +9,13 @@ export default ()=>{
     return(
     <MainStack.Navigator>
         
-        <MainStack.Screen name="Home" component={Home}/>
-        <MainStack.Screen name="Detalhes" component={Detalhes}/>
+        <MainStack.Screen name="Home" component={Home} options={{
+            title:'',
+            headerStyle:{
+                height:30,
+            }
+            }} />
+        <MainStack.Screen name="Detalhes" component={Detalhes} options={{title:''}}/>
     </MainStack.Navigator>
     )
 }

@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import styled from 'styled-components/native';
 
 export const Input = styled.TextInput`
-    width: 70%;
+    width: 80%;
     background-color: #3a4141;
     color: white;
     height: 50px;
@@ -38,17 +38,16 @@ export const TextoResul = styled.SafeAreaView`
   justify-content: center;
   align-items: center;
   margin-top: 2%;
+  margin-bottom: 5%;
 `
 
 export const Buttoon = styled.Text`
         background-color: black;
-        width:30%;
+        width:20%;
         height: 50px;
         color: white;
         border-radius: 15px;
         margin-left: -20px;
-        justify-content: center;
-        align-items: center;
 `
 
 export const DivUsuario = styled.View`
@@ -57,3 +56,5 @@ export const DivUsuario = styled.View`
     width: 80%;
     border-radius: 20px;
 `
+export const Teste = styled.Text`
+`;

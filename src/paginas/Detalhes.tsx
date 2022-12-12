@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, FlatList, VirtualizedList } from "react-native";
+import { View, Text, StyleSheet, Image, FlatList, VirtualizedList,Linking } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Div1, Div2, Container, ContainerRepositorios, Repositorios, Caminho, ContainerPage } from "../componetes/componetesDetalhes";
 
@@ -52,7 +52,9 @@ function Detalhes(props: any) {
 
 
     // Variaveis da ContainerRepositorios
-    
+    function teste() {
+        Linking.openURL('https://www.youtube.com/')
+    }
     return (
         <>
             <ContainerPage>
@@ -64,12 +66,12 @@ function Detalhes(props: any) {
                         />
                     </Div1>
                     <Div2>
-                        <View style={{ margin: 10 }}>
+                        <View style={{ margin: 10 }} >
                             <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>{Ulogin}</Text>
                             <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>{Uname}</Text>
-                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>{Ulocation}</Text>
                             <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>ID: {Uid}</Text>
                             <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>Seguidores:{Useguidor}</Text>
+                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>{Ulocation}</Text>
                         </View>
                     </Div2>
 
@@ -81,6 +83,7 @@ function Detalhes(props: any) {
                     <FlatList
                         data={repo}
                         renderItem={({item}) => (
+                            <Caminho onPress={teste} >
                             <Repositorios>
                                 <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{item.name}</Text>
                                 <Text>{item.language}</Text>
@@ -88,9 +91,9 @@ function Detalhes(props: any) {
                                 <Text>Criado: {item.created_at}</Text>
                                 <Text>Ultimo Push: {item.updated_at}{}</Text>
                             </Repositorios>
+                            </Caminho>
                         )}
                         keyExtractor={item => item.name}
-                        
                     ></FlatList>
                 </View>
             </ContainerRepositorios> 

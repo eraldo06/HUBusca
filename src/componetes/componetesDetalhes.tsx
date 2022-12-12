@@ -28,11 +28,14 @@ export const ContainerRepositorios = styled.ScrollView`
 export const Repositorios = styled.ScrollView`
    background-color: #e3e3e3;
    width: 100%;
+   border-radius: 20px;
+`;
+
+export const Caminho = styled.Text`
+   background-color: #e3e3e3;
+   width: 100%;
    padding: 10px;
    border-radius: 20px;
    margin-top: 10px;
-   margin-bottom: 10px;
-   font-style: italic;
-`;
-
-export const Caminho = styled.Button``
+   margin-bottom: 10px; 
+`
