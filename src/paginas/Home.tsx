@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, FlatList } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { ContainerBusca, Div, Lado01, Lado02, Input, ContainerResultado, TextoResul, Buttoon, DivUsuario, } from '../componetes/componetes'
 
@@ -10,20 +10,9 @@ const Home = (props: any) => {
     const [name, setName] = useState('')
     const [mostrar, setMostrar] = useState(false)
     const [historico, setHistorico] = useState([]);
-  
 
-    const carregar = async () => {
-        const req = await fetch(`https://api.github.com/users/${name}`);
-        const json = await req.json();
 
-        if (json) {
-            setUsuario(json)
-        }
-        linha = true;
-        
-       
 
-    }
 
     function mudarTexto(texto: any) {
         setName(texto)
@@ -34,11 +23,36 @@ const Home = (props: any) => {
         }
     }
     const paginaDetalhes = () => {
-        props.navigation.navigate('Detalhes',{ name: name });
+        // props.navigation.navigate('Detalhes',{ name: name });
     }
 
-    const hand =()=>{
-        alert('deu certo' +name)
+
+
+    let lista:any = []
+
+    const [items, setItems] = useState(lista)
+
+    const carregar = async () => {
+        const req = await fetch(`https://api.github.com/users/${name}`);
+        const json = await req.json();
+
+        if (json) {
+            setUsuario(json)
+        }
+        linha = true;
+
+
+        let item = items;
+        items.push({
+            login: json.login,
+            nome: json.name,
+            id: json.id,
+            location: json.location,
+            avatar_url: json.avatar_url
+        })
+        setItems(item)
+
+
     }
     return (
         <>
@@ -58,11 +72,11 @@ const Home = (props: any) => {
                     </Lado02>
                 </Div>
                 <Div>
-                    <Input 
-                          placeholder="Digite o nome do usuário" 
-                          onChangeText={mudarTexto}
-                          onSubmitEditing={hand}
-                     />
+                    <Input
+                        placeholder="Digite o nome do usuário"
+                        onChangeText={mudarTexto}
+                        onSubmitEditing={carregar}
+                    />
                     <Buttoon onPress={carregar}>
                         <Text style={{ fontSize: 20 }}>Carregar</Text>
                     </Buttoon>
@@ -93,7 +107,7 @@ const Home = (props: any) => {
 
 
                                 <View>
-                                    <Text style={{ marginLeft: 10 }}>{usario.login}</Text>
+                                    <Text style={{ marginLeft: 10, fontSize: 15, fontWeight: 'bold' }}>{usario.login}</Text>
                                     <Text style={{ marginLeft: 10 }}>{usario.name}</Text>
                                     <Text style={{ marginLeft: 10 }}>{usario.id}</Text>
                                     <Text style={{ marginLeft: 10 }}>{usario.location}</Text>
@@ -102,28 +116,32 @@ const Home = (props: any) => {
                         </TextoResul>
                     </>
                 }
-
                 {linha &&
                     <>
                         <Text style={{ fontSize: 17, fontWeight: 'bold', margin: 20 }}>Recentes</Text>
-                        <TextoResul>
-                            <DivUsuario onTouchStart={paginaDetalhes}>
-                                <Image source={{ uri: `${historico.avatar_url}` }}
-                                    style={{ width: 80, height: 80, borderRadius: 20 }}
-                                />
 
+                        <FlatList
+                            data={items}
+                            renderItem={({ item }) => (
 
-
-                                <View>
-                                    <Text style={{ marginLeft: 10 }}>{historico.login}</Text>
-                                    <Text style={{ marginLeft: 10 }}>{historico.name}</Text>
-                                    <Text style={{ marginLeft: 10 }}>{historico.id}</Text>
-                                    <Text style={{ marginLeft: 10 }}>{historico.location}</Text>
-                                </View>
-                            </DivUsuario>
-                        </TextoResul>
-                    </>
-                }
+                                <TextoResul>
+                                    <DivUsuario onTouchStart={paginaDetalhes}>
+                                        <Image source={{ uri: `${item.avatar_url}` }}
+                                            style={{ width: 80, height: 80, borderRadius: 20 }}
+                                        />
+                                        <View>
+                                            <Text style={{ marginLeft: 10, fontSize: 15, fontWeight: 'bold' }}>{item.login}</Text>
+                                            <Text style={{ marginLeft: 10 }}>{item.nome}</Text>
+                                            <Text style={{ marginLeft: 10 }}>{item.id}</Text>
+                                            <Text style={{ marginLeft: 10 }}>{item.location}</Text>
+                                        </View>
+                                    </DivUsuario>
+                                </TextoResul>
+                            )}
+                            keyExtractor={item => item.nome}
+                        >
+                        </FlatList>
+                    </>}
 
             </ContainerResultado>
         </>

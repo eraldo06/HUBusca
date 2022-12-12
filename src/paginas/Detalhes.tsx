@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, FlatList } from "react-native";
+import { View, Text, StyleSheet, Image, FlatList, VirtualizedList } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Div1, Div2, Container, ContainerRepositorios, Repositorios, Caminho, ContainerPage } from "../componetes/componetesDetalhes";
 
@@ -9,7 +9,7 @@ function Detalhes(props: any) {
     const [usuario, setUsuario] = useState([]);
     const [repo, setRepo] = useState([]);
     const [seguidor, setSeguidor] = useState([]);
-   
+
 
     const carregar = async () => {
         const req = await fetch(`https://api.github.com/users/${nomeUsuario}`);
@@ -37,26 +37,39 @@ function Detalhes(props: any) {
             setRepo(json)
         }
     }
+
     carregar()
     quantidadeDeSeguidor()
     carregarR()
+
+    // Variaveis da ContainerPage
+    const Uavatar = usuario.avatar_url;
+    const Ulogin = usuario.login;
+    const Uname = usuario.name;
+    const Ulocation = usuario.location;
+    const Uid = usuario.id;
+    const Useguidor = seguidor.length;
+
+
+    // Variaveis da ContainerRepositorios
+    
     return (
         <>
             <ContainerPage>
                 <Container>
                     <Div1>
                         <Image
-                            source={{ uri: `${usuario.avatar_url}` }}
+                            source={{ uri: `${Uavatar}` }}
                             style={{ width: 180, height: 200, borderRadius: 20 }}
                         />
                     </Div1>
                     <Div2>
                         <View style={{ margin: 10 }}>
-                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>{usuario.login}</Text>
-                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>{usuario.name}</Text>
-                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>{usuario.location}</Text>
-                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>ID: {usuario.id}</Text>
-                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>Seguidores:{seguidor.length}</Text>
+                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>{Ulogin}</Text>
+                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>{Uname}</Text>
+                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>{Ulocation}</Text>
+                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>ID: {Uid}</Text>
+                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>Seguidores:{Useguidor}</Text>
                         </View>
                     </Div2>
 
@@ -64,23 +77,23 @@ function Detalhes(props: any) {
                 <Text style={{ fontSize: 20, marginTop: 10, marginBottom: 20, fontWeight: 'bold', marginLeft: 15 }}>Repositorios:</Text>
             </ContainerPage>
             <ContainerRepositorios>
-
                 <View style={{ marginLeft: 15, marginRight: 15 }}>
                     <FlatList
                         data={repo}
-                        renderItem={({ item }) => (
+                        renderItem={({item}) => (
                             <Repositorios>
                                 <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{item.name}</Text>
                                 <Text>{item.language}</Text>
                                 <Text>{item.description}</Text>
                                 <Text>Criado: {item.created_at}</Text>
-                                <Text>Ultimo Push: {item.updated_at}</Text>
+                                <Text>Ultimo Push: {item.updated_at}{}</Text>
                             </Repositorios>
                         )}
                         keyExtractor={item => item.name}
+                        
                     ></FlatList>
                 </View>
-            </ContainerRepositorios>
+            </ContainerRepositorios> 
 
         </>
     )
