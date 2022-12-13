@@ -1,59 +1,66 @@
 import { View, Text, StyleSheet, Image, FlatList, VirtualizedList,Linking } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Div1, Div2, Container, ContainerRepositorios, Repositorios, Caminho, ContainerPage } from "../componetes/componetesDetalhes";
+import axios from "axios";
 
+type ResultadosDoUsuario ={
+    login:string;
+    name: string;
+    avatar: string;
+    id:number;
+    location:number;
+    sqtSeguirdor:number;
+}
 
 function Detalhes(props: any) {
 
     let nomeUsuario = props.route.params.name
-    const [usuario, setUsuario] = useState([]);
-    const [repo, setRepo] = useState([]);
-    const [seguidor, setSeguidor] = useState([]);
+    let lista:any = []
+    const [repo, setRepo] = useState([lista]);
+
+    const [login, setLogin] = useState('')
+    const [name, setName] = useState('')
+    const [avatar, setAvatar] = useState('')
+    const [id, setId] = useState()
+    const [location, setLocation] = useState('')
+    const [sqtSeguirdor, setSqtSeguirdor] = useState()
+
+
 
 
     const carregar = async () => {
-        const req = await fetch(`https://api.github.com/users/${nomeUsuario}`);
-        const json = await req.json();
-
-        if (json) {
-            setUsuario(json)
-        }
-
+        axios
+        .get(`https://api.github.com/users/${nomeUsuario}`)
+        .then((res)=>{
+            setLogin(res.data.login)
+            setAvatar(res.data.avatar_url);
+            setLocation(res.data.location);
+            setId(res.data.id);
+            setName(res.data.name);
+        })
     }
     const quantidadeDeSeguidor = async () => {
-        const req = await fetch(`https://api.github.com/users/${nomeUsuario}/followers`);
-        const json = await req.json();
-
-        if (json) {
-            setSeguidor(json)
-        }
+        axios
+        .get(`https://api.github.com/users/${nomeUsuario}/followers`)
+        .then((res)=>{
+            setSqtSeguirdor(res.data.length)
+        })
     }
 
     const carregarR = async () => {
-        const req = await fetch(`https://api.github.com/users/${nomeUsuario}/repos`);
-        const json = await req.json();
-
-        if (json) {
-            setRepo(json)
-        }
+        axios
+        .get(`https://api.github.com/users/${nomeUsuario}/repos`)
+        .then((res)=>{
+            setRepo(res.data)
+        })
     }
 
     carregar()
     quantidadeDeSeguidor()
     carregarR()
 
-    // Variaveis da ContainerPage
-    const Uavatar = usuario.avatar_url;
-    const Ulogin = usuario.login;
-    const Uname = usuario.name;
-    const Ulocation = usuario.location;
-    const Uid = usuario.id;
-    const Useguidor = seguidor.length;
-
-
-    // Variaveis da ContainerRepositorios
     function teste() {
-        Linking.openURL('https://www.youtube.com/')
+        
     }
     return (
         <>
@@ -61,17 +68,17 @@ function Detalhes(props: any) {
                 <Container>
                     <Div1>
                         <Image
-                            source={{ uri: `${Uavatar}` }}
+                            source={{ uri: `${avatar}` }}
                             style={{ width: 180, height: 200, borderRadius: 20 }}
                         />
                     </Div1>
                     <Div2>
                         <View style={{ margin: 10 }} >
-                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>{Ulogin}</Text>
-                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>{Uname}</Text>
-                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>ID: {Uid}</Text>
-                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>Seguidores:{Useguidor}</Text>
-                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>{Ulocation}</Text>
+                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>{login}</Text>
+                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>{name}</Text>
+                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>ID: {id}</Text>
+                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>Seguidores:{sqtSeguirdor}</Text>
+                            <Text style={{ fontSize: 17, fontWeight: 'bold', marginBottom: 5 }}>{location}</Text>
                         </View>
                     </Div2>
 

@@ -6,22 +6,38 @@ import axios from "axios";
 
 let linha = false;
 
+type BuscaUsuario ={
+    login:string;
+    name: string;
+    avatar: string;
+    id:number;
+    location:number;
+}
+
 const Home = (props: any) => {
 
     const [usario, setUsuario] = useState([]);
-    const [name, setName] = useState('')
+    const [nome, setNome] = useState('')
     const [mostrar, setMostrar] = useState(false)
 
+    // variaveis para mostrar no resultado da pesquisa
+    const [login, setLogin] = useState('')
+    const [name, setName] = useState('')
+    const [avatar, setAvatar] = useState('')
+    const [id, setId] = useState()
+    const [location, setLocation] = useState('')
+  
+
     function mudarTexto(texto: any) {
-        setName(texto)
-        if (name.length > 1) {
+        setNome(texto)
+        if (nome.length > 1) {
             setMostrar(true)
         } else {
 
         }
     }
     const paginaDetalhes = () => {
-      //  props.navigation.navigate('Detalhes',{ name: name });
+      props.navigation.navigate('Detalhes',{ name: nome });
     }
 
 
@@ -31,10 +47,16 @@ const Home = (props: any) => {
 
     const carregar = async () => {
         
-        if (name.trim() != '') {
+        if (nome.trim() != '') {
             axios
-            .get(`https://api.github.com/users/${name}`)
+            .get(`https://api.github.com/users/${nome}`)
             .then((res) => {
+                setLogin(res.data.login)
+                setAvatar(res.data.avatar_url);
+                setLocation(res.data.location);
+                setId(res.data.id);
+                setName(res.data.name);
+
                 items.push({
                     login: res.data.login,
                     nome: res.data.name,
@@ -46,12 +68,7 @@ const Home = (props: any) => {
                     setUsuario(res.data)
                 }
               })
-          
-
-           
             linha = true;
-            
-          
             let item = items;
             setItems(item)
         } 
@@ -96,14 +113,14 @@ const Home = (props: any) => {
                         <Text style={{ fontSize: 17, fontWeight: 'bold', margin: 20 }}>Usuário encontrado</Text>
                         <TextoResul>
                             <DivUsuario onTouchStart={paginaDetalhes}>
-                                <Image source={{ uri: `${usario.avatar_url}` }}
-                                    style={{ width: 80, borderRadius: 20 }}
+                                <Image source={{ uri: `${avatar}` }}
+                                    style={{ width: 90, borderRadius: 20 }}
                                 />
                                 <View>
-                                    <Text style={{ marginLeft: 10, fontSize: 15, fontWeight: 'bold' }}>{usario.login}</Text>
-                                    <Text style={{ marginLeft: 10 }}>{usario.name}</Text>
-                                    <Text style={{ marginLeft: 10 }}>{usario.id}</Text>
-                                    <Text style={{ marginLeft: 10 }}>{usario.location}</Text>
+                                    <Text style={{ marginLeft: 10, fontSize: 15, fontWeight: 'bold', marginTop:5 }}>{login}</Text>
+                                    <Text style={{ marginLeft: 10 }}>{name}</Text>
+                                    <Text style={{ marginLeft: 10 }}>{id}</Text>
+                                    <Text style={{ marginLeft: 10, marginBottom:5 }}>{location}</Text>
                                 </View>
                             </DivUsuario>
                         </TextoResul>
@@ -120,13 +137,13 @@ const Home = (props: any) => {
                                 <TextoResul>
                                     <DivUsuario>
                                         <Image source={{ uri: `${item.avatar_url}` }}
-                                            style={{ width: 80, borderRadius: 20 }}
+                                            style={{ width: 90, borderRadius: 20 }}
                                         />
                                         <View>
-                                            <Text style={{ marginLeft: 10, fontSize: 15, fontWeight: 'bold' }}>{item.login}</Text>
+                                            <Text style={{ marginLeft: 10, fontSize: 15, fontWeight: 'bold', marginTop:5 }}>{item.login}</Text>
                                             <Text style={{ marginLeft: 10 }}>{item.nome}</Text>
                                             <Text style={{ marginLeft: 10 }}>{item.id}</Text>
-                                            <Text style={{ marginLeft: 10 }}>{item.location}</Text>
+                                            <Text style={{ marginLeft: 10, marginBottom:5  }}>{item.location}</Text>
                                         </View>
                                     </DivUsuario>
                                 </TextoResul>

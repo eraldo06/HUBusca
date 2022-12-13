@@ -55,6 +55,7 @@ export const DivUsuario = styled.View`
     background-color: white;
     width: 80%;
     border-radius: 20px;
+
 `
 export const Teste = styled.Text`
 `;
