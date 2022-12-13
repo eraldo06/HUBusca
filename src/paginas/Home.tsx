@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Image, Button, FlatList,} from 'react-native';
+import { StyleSheet, Text, View, Image, Button, FlatList,Linking} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { ContainerBusca, Div, Lado01, Lado02, Input, ContainerResultado, TextoResul, Buttoon, DivUsuario, Div2} from '../componetes/componetes'
 import axios from "axios";
@@ -39,7 +39,7 @@ const Home = (props: any) => {
     const paginaDetalhes = () => {
       props.navigation.navigate('Detalhes',{ name: nome });
     }
-
+  
 
     let lista:any = []
     function limpar(){
@@ -47,9 +47,7 @@ const Home = (props: any) => {
     }
 
     const [items, setItems] = useState(lista)
-
     const carregar = async () => {
-        
         if (nome.trim() != '') {
             axios
             .get(`https://api.github.com/users/${nome}`)
@@ -80,6 +78,8 @@ const Home = (props: any) => {
             setItems(item)
         } 
     }
+    
+    
    
     return (
         <>
@@ -105,6 +105,7 @@ const Home = (props: any) => {
                         onSubmitEditing={carregar}
                     />
                     <Buttoon onPress={carregar}></Buttoon>
+                    {/* <a>teste</a> */}
                 </Div>
             </ContainerBusca>
 
@@ -121,9 +122,11 @@ const Home = (props: any) => {
                         <Text style={{ fontSize: 17, fontWeight: 'bold', margin: 20 }}>Usuário encontrado</Text>
                         <TextoResul>
                             <DivUsuario onTouchStart={paginaDetalhes}>
+                             
                                 <Image source={{ uri: `${avatar}` }}
                                     style={{ width: 90, borderRadius: 20 }}
                                 />
+                               
                                 <View>
                                     <Text style={{ marginLeft: 10, fontSize: 15, fontWeight: 'bold', marginTop:5 }}>{login}</Text>
                                     <Text style={{ marginLeft: 10 }}>{name}</Text>
@@ -146,10 +149,14 @@ const Home = (props: any) => {
                             renderItem={({ item }) => (
                                 <TextoResul>
                                     <DivUsuario>
-                                        <Image source={{ uri:`${item.avatar_url}` }}
+                                        <Image 
+                                        source={{ uri:`${item.avatar_url}` }}
                                             style={{ width: 90, borderRadius: 20 }}
                                         />
-                                        <View>
+                                        <View onTouchEnd={()=>{
+                                            props.navigation.navigate('Detalhes',{ name: item.login });
+                                        }}> 
+
                                             <Text style={{ marginLeft: 10, fontSize: 15, fontWeight: 'bold', marginTop:5 }}>{item.login}</Text>
                                             <Text style={{ marginLeft: 10 }}>{item.nome}</Text>
                                             <Text style={{ marginLeft: 10 }}>{item.id}</Text>
@@ -158,7 +165,7 @@ const Home = (props: any) => {
                                     </DivUsuario>
                                 </TextoResul>
                             )}
-                            keyExtractor={item => item.nome}
+                            keyExtractor={item => item.login}
                         >
                         </FlatList>
                     </>}

@@ -1,7 +1,8 @@
-import { View, Text, StyleSheet, Image, FlatList, VirtualizedList,Linking } from "react-native";
+import { View, Text, StyleSheet, Image, FlatList, VirtualizedList,Linking , LinkingStatic, Button} from "react-native";
 import React, { useEffect, useState } from "react";
 import { Div1, Div2, Container, ContainerRepositorios, Repositorios, Caminho, ContainerPage } from "../componetes/componetesDetalhes";
 import axios from "axios";
+import { Link } from "@react-navigation/native";
 
 type ResultadosDoUsuario ={
     login:string;
@@ -101,19 +102,18 @@ function Detalhes(props: any) {
             <ContainerRepositorios>
                 <View style={{ marginLeft: 15, marginRight: 15 }}>
                     <FlatList
-                    
+                        
                         data={repo}
                         renderItem={({item}) => (
-                           
-                            <Repositorios>
+                            <Repositorios onTouchEnd={()=>{
+                                Linking.openURL(`${item.html_url}`)
+                            }}>
                                 <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{item.name}</Text>
                                 <Text>{item.language}</Text>
                                 <Text>{item.description}</Text>
                                 <Text>Criado:{item.created_at}</Text>
                                 <Text>Ultimo Push: {item.updated_at}</Text>
                             </Repositorios>
-                         
-                            
                         )}
                         keyExtractor={item => item.name}
                     ></FlatList>
