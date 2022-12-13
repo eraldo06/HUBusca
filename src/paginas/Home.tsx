@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Image, Button, FlatList,Linking} from 'react-native';
-import { StatusBar } from 'expo-status-bar';
-import { ContainerBusca, Div, Lado01, Lado02, Input, ContainerResultado, TextoResul, Buttoon, DivUsuario, Div2} from '../componetes/componetes'
+import { Text, View, Image, Button, FlatList, DatePickerAndroidOpenReturn} from 'react-native';
+import { ContainerBusca, Div, Lado01, Lado02, Input, ContainerResultado, TextoResul, Buttoon, DivUsuario, Div2 } from '../componetes/componetes'
 import axios from "axios";
 
 let linha = false;
 
-type BuscaUsuario ={
-    login:string;
+type BuscaUsuario = {
+    login: string;
     name: string;
     avatar: string;
-    id:number;
-    location:number;
+    id: number;
+    location: number;
 }
 
-const Home = (props: any) => {
-    
+const Home = (props:any) => {
+
     const [usario, setUsuario] = useState([]);
     const [nome, setNome] = useState('')
     const [mostrar, setMostrar] = useState(false)
@@ -26,61 +25,54 @@ const Home = (props: any) => {
     const [avatar, setAvatar] = useState('')
     const [id, setId] = useState('')
     const [location, setLocation] = useState('')
-  
+
 
     function mudarTexto(texto: any) {
         setNome(texto)
         if (nome.length > 1) {
             setMostrar(true)
-        } else {
-
         }
     }
     const paginaDetalhes = () => {
-      props.navigation.navigate('Detalhes',{ name: nome });
+        props.navigation.navigate('Detalhes', { name: nome });
     }
-  
 
-    let lista:any = []
-    function limpar(){
-        setItems([])
-    }
+
+    let lista: any = []
+    function limpar() {
+        setItems([])}
 
     const [items, setItems] = useState(lista)
     const carregar = async () => {
         if (nome.trim() != '') {
             axios
-            .get(`https://api.github.com/users/${nome}`)
-            .then((res) => {
-                setLogin(res.data.login)
-                setAvatar(res.data.avatar_url);
-                setLocation(res.data.location);
-                setId(res.data.id);
-                setName(res.data.name);
+                .get(`https://api.github.com/users/${nome}`)
+                .then((res) => {
+                    setLogin(res.data.login)
+                    setAvatar(res.data.avatar_url);
+                    setLocation(res.data.location);
+                    setId(res.data.id);
+                    setName(res.data.name);
 
-                items.push({
-                    login: res.data.login,
-                    nome: res.data.name,
-                    id: res.data.id,
-                    location: res.data.location,
-                    avatar_url: res.data.avatar_url
-                })
-                if (res.data) {
-                    setUsuario(res.data)
-                }
-              })
-              .catch((res)=>{
-                console.log(res);
-                
-            })
+                    items.push({
+                        login: res.data.login,
+                        nome: res.data.name,
+                        id: res.data.id,
+                        location: res.data.location,
+                        avatar_url: res.data.avatar_url
+                    })
+                    if (res.data) {
+                        setUsuario(res.data)}})
+                .catch((res) => {
+                    console.log(res);})
             linha = true;
             let item = items;
             setItems(item)
-        } 
+        }
     }
-    
-    
-   
+
+
+
     return (
         <>
             <ContainerBusca>
@@ -94,7 +86,7 @@ const Home = (props: any) => {
                     <Lado02>
                         <Image
                             source={require('../../assets/logi.png')}
-                            style={{ width: 100, height: 150}}
+                            style={{ width: 100, height: 150 }}
                         />
                     </Lado02>
                 </Div>
@@ -102,13 +94,10 @@ const Home = (props: any) => {
                     <Input
                         placeholder="Digite o nome do usuário"
                         onChangeText={mudarTexto}
-                        onSubmitEditing={carregar}
-                    />
+                        onSubmitEditing={carregar}/>
                     <Buttoon onPress={carregar}></Buttoon>
-                    {/* <a>teste</a> */}
                 </Div>
             </ContainerBusca>
-
 
             <ContainerResultado >
                 <TextoResul>
@@ -116,22 +105,22 @@ const Home = (props: any) => {
                         <Text style={{ fontSize: 20, marginTop: 100 }}>Nenhum histórico...</Text>
                     }
                 </TextoResul>
+                
 
+                
                 {linha &&
                     <>
                         <Text style={{ fontSize: 17, fontWeight: 'bold', margin: 20 }}>Usuário encontrado</Text>
                         <TextoResul>
                             <DivUsuario onTouchStart={paginaDetalhes}>
-                             
                                 <Image source={{ uri: `${avatar}` }}
                                     style={{ width: 90, borderRadius: 20 }}
                                 />
-                               
                                 <View>
-                                    <Text style={{ marginLeft: 10, fontSize: 15, fontWeight: 'bold', marginTop:5 }}>{login}</Text>
+                                    <Text style={{ marginLeft: 10, fontSize: 15, fontWeight: 'bold', marginTop: 5 }}>{login}</Text>
                                     <Text style={{ marginLeft: 10 }}>{name}</Text>
                                     <Text style={{ marginLeft: 10 }}>{id}</Text>
-                                    <Text style={{ marginLeft: 10, marginBottom:5 }}>{location}</Text>
+                                    <Text style={{ marginLeft: 10, marginBottom: 5 }}>{location}</Text>
                                 </View>
                             </DivUsuario>
                         </TextoResul>
@@ -139,38 +128,31 @@ const Home = (props: any) => {
                 }
                 {linha &&
                     <>
-                    <Div2>
-                    <Text style={{ fontSize: 17, fontWeight: 'bold',}}>Recentes</Text>
-                    <Text  onPress={limpar} style={{ fontSize: 17, fontWeight: 'bold',}}>Limpar</Text>
-                    </Div2>
-                    
+                        <Div2>
+                            <Text style={{ fontSize: 17, fontWeight: 'bold', }}>Recentes</Text>
+                            <Text onPress={limpar} style={{ fontSize: 17, fontWeight: 'bold', }}>Limpar</Text>
+                        </Div2>
                         <FlatList
                             data={items}
                             renderItem={({ item }) => (
-                                <TextoResul>
-                                    <DivUsuario>
-                                        <Image 
-                                        source={{ uri:`${item.avatar_url}` }}
+                                <TextoResul onTouchEnd={() => { props.navigation.navigate('Detalhes', { name: item.login }); }}>
+                                    <DivUsuario >
+                                        <Image
+                                            source={{ uri: `${item.avatar_url}` }}
                                             style={{ width: 90, borderRadius: 20 }}
                                         />
-                                        <View onTouchEnd={()=>{
-                                            props.navigation.navigate('Detalhes',{ name: item.login });
-                                        }}> 
-
-                                            <Text style={{ marginLeft: 10, fontSize: 15, fontWeight: 'bold', marginTop:5 }}>{item.login}</Text>
+                                        <View >
+                                            <Text style={{ marginLeft: 10, fontSize: 15, fontWeight: 'bold', marginTop: 5 }}>{item.login}</Text>
                                             <Text style={{ marginLeft: 10 }}>{item.nome}</Text>
                                             <Text style={{ marginLeft: 10 }}>{item.id}</Text>
-                                            <Text style={{ marginLeft: 10, marginBottom:5  }}>{item.location}</Text>
+                                            <Text style={{ marginLeft: 10, marginBottom: 5 }}>{item.location}</Text>
                                         </View>
                                     </DivUsuario>
                                 </TextoResul>
                             )}
-                            keyExtractor={item => item.login}
-                        >
+                            keyExtractor={item => item.login}>
                         </FlatList>
                     </>}
-                    
-
             </ContainerResultado>
         </>
     )

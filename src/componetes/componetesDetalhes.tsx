@@ -33,12 +33,3 @@ export const Repositorios = styled.View`
    margin-bottom: 10px; 
    padding: 10px;
 `;
-
-export const Caminho = styled.Text`
-   background-color: #e3e3e3;
-   width: 100%;
-   padding: 10px;
-   border-radius: 20px;
-   margin-top: 10px;
-   margin-bottom: 10px; 
-`
