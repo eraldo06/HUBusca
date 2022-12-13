@@ -19,6 +19,14 @@ export const Div = styled.View`
     flex-direction: row;
     margin-left: 5%;
 `;
+export const Div2 = styled.View`
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 3%;
+`;
 export const Lado01 = styled.View`
     height: 70%;
     width: 60%;

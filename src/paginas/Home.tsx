@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Image, Button, FlatList,} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { ContainerBusca, Div, Lado01, Lado02, Input, ContainerResultado, TextoResul, Buttoon, DivUsuario, } from '../componetes/componetes'
+import { ContainerBusca, Div, Lado01, Lado02, Input, ContainerResultado, TextoResul, Buttoon, DivUsuario, Div2} from '../componetes/componetes'
 import axios from "axios";
 
 let linha = false;
@@ -15,7 +15,7 @@ type BuscaUsuario ={
 }
 
 const Home = (props: any) => {
-
+    
     const [usario, setUsuario] = useState([]);
     const [nome, setNome] = useState('')
     const [mostrar, setMostrar] = useState(false)
@@ -24,7 +24,7 @@ const Home = (props: any) => {
     const [login, setLogin] = useState('')
     const [name, setName] = useState('')
     const [avatar, setAvatar] = useState('')
-    const [id, setId] = useState()
+    const [id, setId] = useState('')
     const [location, setLocation] = useState('')
   
 
@@ -42,6 +42,9 @@ const Home = (props: any) => {
 
 
     let lista:any = []
+    function limpar(){
+        setItems([])
+    }
 
     const [items, setItems] = useState(lista)
 
@@ -77,6 +80,7 @@ const Home = (props: any) => {
             setItems(item)
         } 
     }
+   
     return (
         <>
             <ContainerBusca>
@@ -132,7 +136,11 @@ const Home = (props: any) => {
                 }
                 {linha &&
                     <>
-                    <Text style={{ fontSize: 17, fontWeight: 'bold', margin: 20 }}>Recentes</Text>
+                    <Div2>
+                    <Text style={{ fontSize: 17, fontWeight: 'bold',}}>Recentes</Text>
+                    <Text  onPress={limpar} style={{ fontSize: 17, fontWeight: 'bold',}}>Limpar</Text>
+                    </Div2>
+                    
                         <FlatList
                             data={items}
                             renderItem={({ item }) => (

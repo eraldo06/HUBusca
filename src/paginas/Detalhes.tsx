@@ -104,7 +104,7 @@ function Detalhes(props: any) {
                     
                         data={repo}
                         renderItem={({item}) => (
-                            <Caminho onPress={teste}>
+                           
                             <Repositorios>
                                 <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{item.name}</Text>
                                 <Text>{item.language}</Text>
@@ -112,7 +112,7 @@ function Detalhes(props: any) {
                                 <Text>Criado:{item.created_at}</Text>
                                 <Text>Ultimo Push: {item.updated_at}</Text>
                             </Repositorios>
-                            </Caminho>
+                         
                             
                         )}
                         keyExtractor={item => item.name}

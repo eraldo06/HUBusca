@@ -29,6 +29,9 @@ export const Repositorios = styled.View`
    background-color: #e3e3e3;
    width: 100%;
    border-radius: 20px;
+   margin-top: 10px;
+   margin-bottom: 10px; 
+   padding: 10px;
 `;
 
 export const Caminho = styled.Text`
