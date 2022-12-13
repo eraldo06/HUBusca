@@ -20,12 +20,12 @@ export const Div2 = styled.View`
    width: 50%;
 `;
 
-export const ContainerRepositorios = styled.ScrollView`
+export const ContainerRepositorios = styled.View`
    background-color: white;
    flex: 1;
 `;
 
-export const Repositorios = styled.ScrollView`
+export const Repositorios = styled.View`
    background-color: #e3e3e3;
    width: 100%;
    border-radius: 20px;

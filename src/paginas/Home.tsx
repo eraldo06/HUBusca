@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Image, Button, FlatList} from 'react-native';
+import { StyleSheet, Text, View, Image, Button, FlatList,} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { ContainerBusca, Div, Lado01, Lado02, Input, ContainerResultado, TextoResul, Buttoon, DivUsuario, } from '../componetes/componetes'
 import axios from "axios";
@@ -68,6 +68,10 @@ const Home = (props: any) => {
                     setUsuario(res.data)
                 }
               })
+              .catch((res)=>{
+                console.log(res);
+                
+            })
             linha = true;
             let item = items;
             setItems(item)
@@ -101,7 +105,7 @@ const Home = (props: any) => {
             </ContainerBusca>
 
 
-            <ContainerResultado>
+            <ContainerResultado >
                 <TextoResul>
                     {mostrar === false &&
                         <Text style={{ fontSize: 20, marginTop: 100 }}>Nenhum histórico...</Text>
@@ -129,14 +133,12 @@ const Home = (props: any) => {
                 {linha &&
                     <>
                     <Text style={{ fontSize: 17, fontWeight: 'bold', margin: 20 }}>Recentes</Text>
-
                         <FlatList
                             data={items}
                             renderItem={({ item }) => (
-
                                 <TextoResul>
                                     <DivUsuario>
-                                        <Image source={{ uri: `${item.avatar_url}` }}
+                                        <Image source={{ uri:`${item.avatar_url}` }}
                                             style={{ width: 90, borderRadius: 20 }}
                                         />
                                         <View>
@@ -152,7 +154,7 @@ const Home = (props: any) => {
                         >
                         </FlatList>
                     </>}
-                       
+                    
 
             </ContainerResultado>
         </>

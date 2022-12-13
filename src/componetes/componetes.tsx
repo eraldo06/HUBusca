@@ -29,7 +29,7 @@ export const Lado02 = styled.View`
 `
 
 // Resultados
-export const ContainerResultado = styled.ScrollView`
+export const ContainerResultado = styled.View`
     flex:1;
     background-color: #3a4141;
 `;

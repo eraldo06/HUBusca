@@ -38,12 +38,20 @@ function Detalhes(props: any) {
             setId(res.data.id);
             setName(res.data.name);
         })
+        .catch((res)=>{
+            console.log(res);
+            
+        })
     }
     const quantidadeDeSeguidor = async () => {
         axios
         .get(`https://api.github.com/users/${nomeUsuario}/followers`)
         .then((res)=>{
             setSqtSeguirdor(res.data.length)
+        })
+        .catch((res)=>{
+            console.log(res);
+            
         })
     }
 
@@ -53,15 +61,20 @@ function Detalhes(props: any) {
         .then((res)=>{
             setRepo(res.data)
         })
+        .catch((res)=>{
+            console.log(res);
+            
+        })
     }
 
     carregar()
     quantidadeDeSeguidor()
     carregarR()
 
-    function teste() {
-        
+    function teste(props:any) {
+        Linking.openURL('https://www.youtube.com/')
     }
+    let data:any
     return (
         <>
             <ContainerPage>
@@ -88,17 +101,19 @@ function Detalhes(props: any) {
             <ContainerRepositorios>
                 <View style={{ marginLeft: 15, marginRight: 15 }}>
                     <FlatList
+                    
                         data={repo}
                         renderItem={({item}) => (
-                            <Caminho onPress={teste} >
+                            <Caminho onPress={teste}>
                             <Repositorios>
                                 <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{item.name}</Text>
                                 <Text>{item.language}</Text>
                                 <Text>{item.description}</Text>
-                                <Text>Criado: {item.created_at}</Text>
-                                <Text>Ultimo Push: {item.updated_at}{}</Text>
+                                <Text>Criado:{item.created_at}</Text>
+                                <Text>Ultimo Push: {item.updated_at}</Text>
                             </Repositorios>
                             </Caminho>
+                            
                         )}
                         keyExtractor={item => item.name}
                     ></FlatList>
