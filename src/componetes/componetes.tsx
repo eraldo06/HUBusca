@@ -11,6 +11,7 @@ export const Input = styled.TextInput`
 export const ContainerBusca = styled.View`
     min-height: 35%;
     background-color: white;
+    
 `;
 export const Div = styled.View`
     flex-direction: row;
@@ -31,6 +32,7 @@ export const Lado01 = styled.View`
 export const Lado02 = styled.View`
     height: 70%;
     width: 40%;
+    font-style: unset;
 `
 
 // Resultados

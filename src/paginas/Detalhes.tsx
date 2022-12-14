@@ -110,7 +110,7 @@ function Detalhes(props: any) {
                                 <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{item.name}</Text>
                                 <Text>{item.language}</Text>
                                 <Text>{item.description}</Text>
-                                <Text>Criado: {mudarData(item.created_at)}</Text>
+                                <Text>Criado:{mudarData(item.created_at)}</Text>
                                 <Text>Ultimo Push: {mudarData(item.updated_at)}</Text>
                               
                             </Repositorios>

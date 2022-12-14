@@ -79,9 +79,9 @@ const Home = (props:any) => {
                 <Div>
                     <Lado01>
                         <Text></Text>
-                        <Text style={{ fontSize: 35 }}>HUBusca</Text>
-                        <Text style={{ fontSize: 16 }}>Encrotre os melhores</Text>
-                        <Text style={{ fontSize: 16 }}>repositórios no github</Text>
+                        <Text style={{ fontSize: 35, fontWeight: 'bold', fontStyle:'italic'}}>HUBusca</Text>
+                        <Text style={{ fontSize: 15, }}>Encrotre os melhores</Text>
+                        <Text style={{ fontSize: 15 }}>repositórios no github</Text>
                     </Lado01>
                     <Lado02>
                         <Image
@@ -119,8 +119,8 @@ const Home = (props:any) => {
                                 <View>
                                     <Text style={{ marginLeft: 10, fontSize: 15, fontWeight: 'bold', marginTop: 5 }}>{login}</Text>
                                     <Text style={{ marginLeft: 10 }}>{name}</Text>
-                                    <Text style={{ marginLeft: 10 }}>{id}</Text>
                                     <Text style={{ marginLeft: 10, marginBottom: 5 }}>{location}</Text>
+                                    <Text></Text>
                                 </View>
                             </DivUsuario>
                         </TextoResul>
@@ -144,8 +144,8 @@ const Home = (props:any) => {
                                         <View >
                                             <Text style={{ marginLeft: 10, fontSize: 15, fontWeight: 'bold', marginTop: 5 }}>{item.login}</Text>
                                             <Text style={{ marginLeft: 10 }}>{item.nome}</Text>
-                                            <Text style={{ marginLeft: 10 }}>{item.id}</Text>
                                             <Text style={{ marginLeft: 10, marginBottom: 5 }}>{item.location}</Text>
+                                            <Text></Text>
                                         </View>
                                     </DivUsuario>
                                 </TextoResul>
