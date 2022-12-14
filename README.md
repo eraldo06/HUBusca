@@ -23,18 +23,18 @@
 
 
 ##  Tela principal<br><br>
-<img src="./assets/tela-principal-branco.jfif" alt="Banco de Dados" height="800" width="40%">
-<img src="./assets/tela-principal-preta.jfif" alt="Banco de Dados" height="800" width="40%"><br><br>
+<img src="./assets/tela-principal-branco.jfif" alt="Banco de Dados" height="600" width="40%">
+<img src="./assets/tela-principal-preta.jfif" alt="Banco de Dados" height="600" width="40%"><br><br>
 
 
 
 ##  Resultado da pesquisa e histórico<br><br>
-<img src="./assets/tela-busca-branca.jfif" alt="Banco de Dados" height="800" width="400">
-<img src="./assets/tela-busca-preta.jfif" alt="Banco de Dados" height="800" width="400"><br><br>
+<img src="./assets/tela-busca-branca.jfif" alt="Banco de Dados" height="600" width="40%">
+<img src="./assets/tela-busca-preta.jfif" alt="Banco de Dados" height="600" width="40%"><br><br>
 
 
 ##  Tela detalhes do usuário<br><br>
-<img src="./assets/tela-repo.jfif" alt="Banco de Dados" height="800" width="400">
-<img src="./assets/tela-repo-preta.jfif" alt="Banco de Dados" height="800" width="400">
+<img src="./assets/tela-repo.jfif" alt="Banco de Dados" height="600" width="40%">
+<img src="./assets/tela-repo-preta.jfif" alt="Banco de Dados" height="600" width="40%">
 
 
