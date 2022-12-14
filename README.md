@@ -23,8 +23,8 @@
 
 
 ##  Tela principal<br><br>
-<img src="./assets/tela-principal-branco.jfif" alt="Banco de Dados" height="800" width="400">
-<img src="./assets/tela-principal-preta.jfif" alt="Banco de Dados" height="800" width="400"><br><br>
+<img src="./assets/tela-principal-branco.jfif" alt="Banco de Dados" height="800" width="40%">
+<img src="./assets/tela-principal-preta.jfif" alt="Banco de Dados" height="800" width="40%"><br><br>
 
 
 
