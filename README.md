@@ -1,6 +1,8 @@
-#  HUBusca
+## HUBusca
+## Desafio React Native da Clicksoft 
 
-
+## Minha experiência
+Minha primeira vez fez na linguagem <a href="https://reactnative.dev/">React Native</a> e gostei bastante do resultado. Foi um desafio bastante difícil, porque tive que me adaptar a linguagem, muitos conceitos ainda não sabiam e o tempo foi curto, mas acho que meu resultado foi bastante legal. 
 
 ##  REQUISITOS
 1-  Permita que na tela principal busquemos os dados de uma pessoa do GitHub através do nome de usuário. E que no resultado esperado a foto, o    nome, o login, e a localização.
@@ -11,6 +13,15 @@
 
 4-  Crie um menu contendo todos os usuários pesquisados ​​recentemente, que também seguem o padrão com os dados iguais o da tarefa 1, e com perfil igual ao da tarefa 2.
 
+## Criador
+<table align=center>
+  <tr>
+
+ <td align="center" ></br><a href="https://www.linkedin.com/in/eraldo-leonardo/"> <img src="https://avatars.githubusercontent.com/u/99341827?v=4" width=40%/><br> Eraldo Leonardo </a>
+   </td>
+
+  </tr>
+</table>
 
 ## Tecnologias
 <a href="https://expo.dev/" target="_blank">● React Native (Expo)</a>
